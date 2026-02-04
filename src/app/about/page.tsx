@@ -9,11 +9,11 @@ export default function About() {
           About Page
         </Typography>
         
-        <Typography variant="body1" paragraph>
+        <Typography variant="body1" sx={{ mb: 2 }}>
           This is an example about page demonstrating routing with Material-UI and Next.js.
         </Typography>
 
-        <Typography variant="body1" paragraph>
+        <Typography variant="body1" sx={{ mb: 2 }}>
           The navigation is handled by Next.js Link component, wrapped with Material-UI
           styling and configured globally in the theme.
         </Typography>
