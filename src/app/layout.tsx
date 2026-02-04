@@ -2,6 +2,7 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import type { Metadata } from "next";
 import { Roboto } from 'next/font/google';
 import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline, InitColorSchemeScript } from '@mui/material';
 import theme from '../theme';
 import "./globals.css";
 
@@ -24,9 +25,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={roboto.variable}>
+      <InitColorSchemeScript />
       <body>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
+            <CssBaseline />
             {children}
           </ThemeProvider>
         </AppRouterCacheProvider>
