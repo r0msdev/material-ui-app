@@ -22,6 +22,10 @@ export default function Home() {
           <Link href="/about" underline="hover" color="secondary">
             Link to About Page
           </Link>
+          
+          <Link href="/data-test" underline="hover" color="primary">
+            Link to Data Retrieval Test
+          </Link>
         </Stack>
 
         <Typography variant="h5" component="h2" gutterBottom sx={{ mt: 4 }}>
