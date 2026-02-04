@@ -7,16 +7,8 @@ import {
   Drawer,
   AppBar,
   Toolbar,
-  List,
   Typography,
-  Divider,
   IconButton,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  useMediaQuery,
-  useTheme as useMuiTheme,
 } from '@mui/material';
 import {
   Menu as MenuIcon,
@@ -26,16 +18,10 @@ import {
   Info as InfoIcon,
   Storage as DataIcon,
 } from '@mui/icons-material';
-import Link from 'next/link';
 import { useColorScheme } from '@mui/material/styles';
+import DrawerContent, { type MenuItem } from './DrawerContent';
 
 const drawerWidth = 240;
-
-interface MenuItem {
-  text: string;
-  icon: React.ReactNode;
-  href: string;
-}
 
 const menuItems: MenuItem[] = [
   { text: 'Home', icon: <HomeIcon />, href: '/' },
@@ -49,8 +35,6 @@ interface AppLayoutProps {
 
 export default function AppLayout({ children }: AppLayoutProps) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const muiTheme = useMuiTheme();
-  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
   const pathname = usePathname();
   const { mode, setMode } = useColorScheme();
 
@@ -61,26 +45,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const handleThemeToggle = () => {
     setMode(mode === 'light' ? 'dark' : 'light');
   };
-
-  const drawer = (
-    <Box>
-      <List>
-        {menuItems.map((item) => (
-          <ListItem key={item.text} disablePadding>
-            <ListItemButton
-              component={Link}
-              href={item.href}
-              selected={pathname === item.href}
-              onClick={() => isMobile && setMobileOpen(false)}
-            >
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -128,7 +92,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
               },
             }}
           >
-            {drawer}
+            <DrawerContent 
+              items={menuItems} 
+              currentPath={pathname}
+              onItemClick={() => setMobileOpen(false)}
+            />
           </Drawer>
           
           {/* Desktop drawer */}
@@ -145,7 +113,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
             }}
             open
           >
-            {drawer}
+            <DrawerContent items={menuItems} currentPath={pathname} />
           </Drawer>
         </Box>
         
