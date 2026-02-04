@@ -1,60 +1,78 @@
-import { Button, Link, Typography, Container, Box, Stack } from '@mui/material';
+import { Typography, Box, Paper, Grid, Card, CardContent } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
+import StorageIcon from '@mui/icons-material/Storage';
 
 export default function Home() {
   return (
-    <Container maxWidth="md">
-      <Box sx={{ my: 4 }}>
-        <Typography variant="h2" component="h1" gutterBottom>
-          Material-UI + Next.js Routing Integration
-        </Typography>
-        
-        <Typography variant="h5" component="h2" gutterBottom sx={{ mt: 4 }}>
-          Link Component Examples
-        </Typography>
-        
-        <Stack spacing={2} sx={{ mt: 2 }}>
-          <Link href="/" underline="hover">
-            Link to Home (using MUI Link component)
-          </Link>
-          
-          <Link href="/about" underline="hover" color="secondary">
-            Link to About Page
-          </Link>
-          
-          <Link href="/data-test" underline="hover" color="primary">
-            Link to Data Retrieval Test
-          </Link>
-        </Stack>
+    <Box>
+      <Typography variant="h3" component="h1" gutterBottom>
+        Welcome to Material-UI + Next.js
+      </Typography>
+      
+      <Typography variant="body1" sx={{ mb: 4 }}>
+        A modern web application with responsive layout, theme switching, and routing.
+      </Typography>
 
-        <Typography variant="h5" component="h2" gutterBottom sx={{ mt: 4 }}>
-          Button Component Examples
-        </Typography>
-        
-        <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
-          <Button 
-            variant="contained" 
-            href="/" 
-            startIcon={<HomeIcon />}
-          >
-            Home Button
-          </Button>
-          
-          <Button 
-            variant="outlined" 
-            href="/about"
-            startIcon={<InfoIcon />}
-          >
-            About Button
-          </Button>
-        </Stack>
+      <Grid container spacing={3}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+          <Card>
+            <CardContent>
+              <HomeIcon color="primary" sx={{ fontSize: 40, mb: 2 }} />
+              <Typography variant="h6" gutterBottom>
+                Home
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Welcome page with app overview and features
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
 
-        <Typography variant="body1" sx={{ mt: 4 }}>
-          These components use Next.js Link under the hood for client-side navigation,
-          configured globally in the theme.
+        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+          <Card>
+            <CardContent>
+              <InfoIcon color="secondary" sx={{ fontSize: 40, mb: 2 }} />
+              <Typography variant="h6" gutterBottom>
+                About
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Learn more about this application and its features
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+          <Card>
+            <CardContent>
+              <StorageIcon color="primary" sx={{ fontSize: 40, mb: 2 }} />
+              <Typography variant="h6" gutterBottom>
+                Data Test
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Test data fetching with loading states and API proxy
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+
+      <Paper elevation={2} sx={{ p: 3, mt: 4 }}>
+        <Typography variant="h6" gutterBottom>
+          Features
         </Typography>
-      </Box>
-    </Container>
+        <Typography variant="body2" component="div">
+          <ul>
+            <li>Responsive sidebar navigation</li>
+            <li>Light/Dark theme toggle</li>
+            <li>Material-UI v7 components</li>
+            <li>Next.js App Router</li>
+            <li>TypeScript support</li>
+            <li>Server-side rendering</li>
+          </ul>
+        </Typography>
+      </Paper>
+    </Box>
   );
 }
