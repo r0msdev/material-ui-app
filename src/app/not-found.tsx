@@ -20,7 +20,7 @@ export default function NotFound() {
         404 — Page not found
       </Typography>
       <Typography variant="body2" color="text.secondary">
-        The page you're looking for doesn't exist or has been moved.
+      The page you&apos;re looking for doesn&apos;t exist or has been moved.
       </Typography>
       <Button variant="contained" component={Link} href="/">
         Back to home
