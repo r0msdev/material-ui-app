@@ -26,8 +26,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={roboto.variable} suppressHydrationWarning>
-      <InitColorSchemeScript />
       <body>
+        <InitColorSchemeScript />
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />

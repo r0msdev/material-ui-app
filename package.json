@@ -6,7 +6,26 @@
     "dev": "next dev -p 3002",
     "build": "next build",
     "start": "next start -p 3002",
-    "lint": "eslint"
+    "type-check": "tsc --noEmit",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "clean": "rm -rf .next out dist node_modules/.cache",
+    "analyze": "ANALYZE=true next build",
+    "docker:build": "docker build -t material-ui-app .",
+    "docker:build:dev": "docker build -f Dockerfile.dev -t material-ui-app:dev .",
+    "docker:build:prod": "docker build --pull --no-cache -t material-ui-app:latest .",
+    "docker:dev": "docker-compose --profile dev up app-dev",
+    "docker:dev:build": "docker-compose --profile dev up --build app-dev",
+    "docker:prod": "docker-compose --profile prod up app",
+    "docker:prod:build": "docker-compose --profile prod up --build app",
+    "docker:down": "docker-compose down",
+    "docker:down:volumes": "docker-compose down -v",
+    "docker:logs": "docker-compose logs -f",
+    "docker:scan": "docker scout cves material-ui-app",
+    "docker:clean": "docker system prune -af --volumes",
+    "audit": "npm audit --omit=dev",
+    "audit:all": "npm audit",
+    "audit:fix": "npm audit fix"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
@@ -21,6 +40,7 @@
     "react-dom": "19.2.3"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^16.1.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

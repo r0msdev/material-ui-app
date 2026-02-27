@@ -1,0 +1,56 @@
+services:
+  # Production service (use --profile prod or --profile production)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: material-ui-app
+    ports:
+      - "3002:3002"
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+      - PORT=3002
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3002/api/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 30s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
+    profiles:
+      - prod
+      - production
+
+  # Development service (use --profile dev)
+  # Note: No volume mounts to avoid permission issues with non-root user
+  # Rebuild container to see code changes: make docker-dev-build
+  app-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: material-ui-app-dev
+    ports:
+      - "3002:3002"
+    environment:
+      - NODE_ENV=development
+      - NEXT_TELEMETRY_DISABLED=1
+      - PORT=3002
+    env_file:
+      - .env
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    networks:
+      - app-network
+    profiles:
+      - dev
+      - development
+
+networks:
+  app-network:
+    driver: bridge

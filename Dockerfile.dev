@@ -1,0 +1,45 @@
+# syntax=docker/dockerfile:1
+
+# Development Dockerfile for Next.js application
+# Optimized for fast rebuilds and development workflow
+
+FROM node:20-alpine
+
+LABEL org.opencontainers.image.title="material-ui-app-dev" \
+      org.opencontainers.image.description="Next.js Material-UI application (development)" \
+      org.opencontainers.image.version="1.0.0"
+
+# Install libc6-compat for compatibility
+RUN apk add --no-cache libc6-compat
+
+WORKDIR /app
+
+# Set development environment
+ENV NODE_ENV=development
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S -u 1001 -G nodejs nodejs && \
+    chown -R nodejs:nodejs /app
+
+# Copy package files with ownership
+COPY --chown=nodejs:nodejs package*.json ./
+
+# Switch to non-root user before installing
+USER nodejs
+
+# Install all dependencies (including devDependencies)
+RUN npm ci && npm cache clean --force
+
+# Copy source code with ownership
+# In development, you'll typically mount source as volume,
+# but we copy here for initial setup
+COPY --chown=nodejs:nodejs . .
+
+# Expose the development port
+EXPOSE 3002
+
+# Start development server with hot reload
+# Using npx ensures the script runs even with volume mounts
+CMD ["npx", "next", "dev", "-p", "3002"]
