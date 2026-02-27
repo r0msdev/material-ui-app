@@ -6,11 +6,10 @@ import {
   CardContent,
   Typography,
   Box,
-  Alert,
   Chip,
 } from '@mui/material';
 import { fetchPosts } from '@/lib/api';
-import { LoadingState } from '@/shared/ui';
+import { LoadingState, ErrorState } from '@/shared/ui';
 
 export default function DataFetcher() {
   const { data, isLoading, error } = useQuery({
@@ -19,11 +18,7 @@ export default function DataFetcher() {
   });
 
   if (error) {
-    return (
-      <Alert severity="error" sx={{ mt: 2 }}>
-        Error: {error.message}
-      </Alert>
-    );
+    return <ErrorState error={error} inline />;
   }
 
   if (isLoading) {
