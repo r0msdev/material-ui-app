@@ -5,12 +5,12 @@ import {
   Card,
   CardContent,
   Typography,
-  Skeleton,
   Box,
   Alert,
   Chip,
 } from '@mui/material';
 import { fetchPosts } from '@/lib/api';
+import { LoadingState } from '@/shared/ui';
 
 export default function DataFetcher() {
   const { data, isLoading, error } = useQuery({
@@ -27,21 +27,7 @@ export default function DataFetcher() {
   }
 
   if (isLoading) {
-    return (
-      <Box sx={{ mt: 2 }}>
-        <Chip label="Loading..." color="primary" sx={{ mb: 2 }} />
-        {[1, 2, 3].map((item) => (
-          <Card key={item} sx={{ mb: 2 }}>
-            <CardContent>
-              <Skeleton variant="text" width="60%" height={32} />
-              <Skeleton variant="text" width="100%" />
-              <Skeleton variant="text" width="100%" />
-              <Skeleton variant="text" width="80%" />
-            </CardContent>
-          </Card>
-        ))}
-      </Box>
-    );
+    return <LoadingState />;
   }
 
   return (

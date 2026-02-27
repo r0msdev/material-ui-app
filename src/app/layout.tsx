@@ -1,10 +1,7 @@
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import type { Metadata } from "next";
 import { Roboto } from 'next/font/google';
-import { ThemeProvider } from '@mui/material/styles';
-import { CssBaseline, InitColorSchemeScript } from '@mui/material';
-import { theme } from '@/lib/config';
-import { QueryProvider } from '@/lib/query';
+import { InitColorSchemeScript } from '@mui/material';
+import { Providers } from '@/lib/providers';
 import { AppLayout } from '@/shared/ui';
 import "./globals.css";
 
@@ -29,14 +26,9 @@ export default function RootLayout({
     <html lang="en" className={roboto.variable} suppressHydrationWarning>
       <body>
         <InitColorSchemeScript />
-        <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <QueryProvider>
-              <AppLayout>{children}</AppLayout>
-            </QueryProvider>
-          </ThemeProvider>
-        </AppRouterCacheProvider>
+        <Providers>
+          <AppLayout>{children}</AppLayout>
+        </Providers>
       </body>
     </html>
   );
