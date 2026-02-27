@@ -4,6 +4,7 @@ import { Roboto } from 'next/font/google';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, InitColorSchemeScript } from '@mui/material';
 import { theme } from '@/lib/config';
+import { QueryProvider } from '@/lib/query';
 import { AppLayout } from '@/shared/ui';
 import "./globals.css";
 
@@ -31,7 +32,9 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <AppLayout>{children}</AppLayout>
+            <QueryProvider>
+              <AppLayout>{children}</AppLayout>
+            </QueryProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

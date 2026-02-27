@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import {
   Card,
   CardContent,
@@ -10,40 +10,23 @@ import {
   Alert,
   Chip,
 } from '@mui/material';
-import { fetchPosts, type Post } from '@/lib/api';
+import { fetchPosts } from '@/lib/api';
 
 export default function DataFetcher() {
-  const [data, setData] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const result = await fetchPosts();
-        setData(result);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    // Simulate a slight delay to see the skeleton
-    const timer = setTimeout(fetchData, 500);
-    return () => clearTimeout(timer);
-  }, []);
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['posts'],
+    queryFn: fetchPosts,
+  });
 
   if (error) {
     return (
       <Alert severity="error" sx={{ mt: 2 }}>
-        Error: {error}
+        Error: {error.message}
       </Alert>
     );
   }
 
-  if (loading) {
+  if (isLoading) {
     return (
       <Box sx={{ mt: 2 }}>
         <Chip label="Loading..." color="primary" sx={{ mb: 2 }} />
@@ -64,7 +47,7 @@ export default function DataFetcher() {
   return (
     <Box sx={{ mt: 2 }}>
       <Chip label="Data Loaded!" color="success" sx={{ mb: 2 }} />
-      {data.map((post) => (
+      {(data ?? []).map((post) => (
         <Card key={post.id} sx={{ mb: 2 }}>
           <CardContent>
             <Typography variant="h6" component="h3" gutterBottom>
