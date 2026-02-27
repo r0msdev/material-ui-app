@@ -1,6 +1,5 @@
 import { Box, Typography, Button } from '@mui/material';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
-import Link from 'next/link';
 
 export default function NotFound() {
   return (
@@ -22,7 +21,7 @@ export default function NotFound() {
       <Typography variant="body2" color="text.secondary">
       The page you&apos;re looking for doesn&apos;t exist or has been moved.
       </Typography>
-      <Button variant="contained" component={Link} href="/">
+      <Button variant="contained" href="/">
         Back to home
       </Button>
     </Box>
