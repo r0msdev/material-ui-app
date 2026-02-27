@@ -1,14 +1,14 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-// Add middleware logic here.
+// Add proxy logic here.
 // Common uses: auth guards, redirects, locale detection, A/B testing.
 //
 // Examples:
 //   if (!isAuthenticated(request)) return NextResponse.redirect(new URL('/login', request.url));
 //   if (isBot(request)) return NextResponse.rewrite(new URL('/bot-landing', request.url));
 
-export function middleware(_request: NextRequest) {
+export function proxy(_request: NextRequest) {
   return NextResponse.next();
 }
 

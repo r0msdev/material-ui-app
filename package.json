@@ -9,6 +9,9 @@
     "type-check": "tsc --noEmit",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "clean": "rm -rf .next out dist node_modules/.cache",
     "analyze": "ANALYZE=true next build",
     "docker:build": "docker build -t material-ui-app .",
@@ -42,12 +45,19 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^16.1.6",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^5.1.4",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
-    "typescript": "^5"
+    "jsdom": "^28.1.0",
+    "msw": "^2.12.10",
+    "typescript": "^5",
+    "vitest": "^4.0.18"
   }
 }

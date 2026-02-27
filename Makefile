@@ -1,4 +1,4 @@
-.PHONY: help dev build start clean type-check lint docker-dev docker-prod docker-down docker-logs docker-clean install
+.PHONY: help dev build start clean type-check lint docker-dev docker-prod docker-down docker-logs docker-clean install test test-watch
 
 # Default target
 help:
@@ -12,8 +12,8 @@ help:
 	@echo "Quality checks:"
 	@echo "  make type-check       - Run TypeScript type checking"
 	@echo "  make lint             - Run ESLint"
-	@echo "  make lint-fix         - Run ESLint and fix issues"
-	@echo ""
+	@echo "  make lint-fix         - Run ESLint and fix issues"	@echo "  make test             - Run tests"
+	@echo "  make test-watch       - Run tests in watch mode"	@echo ""
 	@echo "Maintenance:"
 	@echo "  make clean            - Clean build artifacts"
 	@echo "  make install          - Install dependencies"
@@ -48,6 +48,12 @@ lint:
 
 lint-fix:
 	npm run lint:fix
+
+test:
+	npm run test
+
+test-watch:
+	npm run test:watch
 
 # Maintenance
 clean:
