@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { Roboto } from 'next/font/google';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, InitColorSchemeScript } from '@mui/material';
-import theme from '../theme';
-import AppLayout from '../components/AppLayout';
+import { theme } from '@/lib/config';
+import { AppLayout } from '@/shared/ui';
 import "./globals.css";
 
 const roboto = Roboto({

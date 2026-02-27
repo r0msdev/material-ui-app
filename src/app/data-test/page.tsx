@@ -1,5 +1,5 @@
 import { Box, Typography, Paper } from '@mui/material';
-import DataFetcher from './DataFetcher';
+import { DataFetcher } from '@/features/data-test';
 
 export default function DataTestPage() {
   return (

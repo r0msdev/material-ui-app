@@ -1,6 +1,6 @@
 'use client';
 import { createTheme } from '@mui/material/styles';
-import Link from './components/Link';
+import Link from '@/shared/ui/Link';
 
 const theme = createTheme({
   cssVariables: {

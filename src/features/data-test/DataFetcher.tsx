@@ -1,22 +1,16 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { 
-  Card, 
-  CardContent, 
-  Typography, 
-  Skeleton, 
+import {
+  Card,
+  CardContent,
+  Typography,
+  Skeleton,
   Box,
   Alert,
-  Chip
+  Chip,
 } from '@mui/material';
-
-interface Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
+import { fetchPosts, type Post } from '@/lib/api';
 
 export default function DataFetcher() {
   const [data, setData] = useState<Post[]>([]);
@@ -27,13 +21,7 @@ export default function DataFetcher() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch('/api/data');
-        
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        
-        const result = await response.json();
+        const result = await fetchPosts();
         setData(result);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
@@ -85,10 +73,10 @@ export default function DataFetcher() {
             <Typography variant="body2" color="text.secondary">
               {post.body}
             </Typography>
-            <Chip 
-              label={`User ID: ${post.userId}`} 
-              size="small" 
-              sx={{ mt: 1 }} 
+            <Chip
+              label={`User ID: ${post.userId}`}
+              size="small"
+              sx={{ mt: 1 }}
             />
           </CardContent>
         </Card>

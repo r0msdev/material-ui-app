@@ -70,10 +70,10 @@ docker-prod-build:
 	docker-compose --profile prod up --build
 
 docker-down:
-	docker-compose down
+	docker-compose --profile dev --profile development --profile prod --profile production down
 
 docker-down-volumes:
-	docker-compose down -v
+	docker-compose --profile dev --profile development --profile prod --profile production down -v
 
 docker-logs:
 	docker-compose logs -f

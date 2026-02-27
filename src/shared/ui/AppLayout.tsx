@@ -19,7 +19,7 @@ import {
   Storage as DataIcon,
 } from '@mui/icons-material';
 import { useColorScheme } from '@mui/material/styles';
-import DrawerContent, { type MenuItem } from './DrawerContent';
+import DrawerContent, { type MenuItem } from '@/shared/ui/DrawerContent';
 
 const drawerWidth = 240;
 
